@@ -7,11 +7,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Explorar Torneos',
-  description: 'Descubre y sigue los mejores torneos de E-Football, FIFA y PES creados por nuestra comunidad. Mira tablas de posiciones y resultados en vivo.',
+  description: 'Descubre torneos de E-Football, FIFA y PES creados por la comunidad. Mira tablas de posiciones y resultados en vivo.',
+  alternates: {
+    canonical: "/torneos",
+  },
   openGraph: {
     title: 'Explorar Torneos | Torneos E-Football',
-    description: 'Descubre y sigue los mejores torneos de E-Football, FIFA y PES creados por nuestra comunidad. Mira tablas de posiciones y resultados en vivo.',
-    url: 'https://codemultiall.net.pe/torneos',
+    description: 'Descubre torneos de E-Football, FIFA y PES creados por la comunidad. Mira tablas de posiciones y resultados en vivo.',
+    url: '/torneos',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   }
 };

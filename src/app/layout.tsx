@@ -9,17 +9,21 @@ import TourGuide from "@/components/TourGuide";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://tus-torneos.vercel.app"),
   title: {
     template: "%s | Torneos E-Football",
     default: "Crear Torneos de E-Football, PES, FIFA, FC 24 | Gratis",
   },
-  description: "La mejor plataforma gratuita para crear, gestionar y compartir torneos de E-Football, PES, FIFA, FC 24 y más. Genera fixtures, tablas de posiciones y brackets eliminatorios (Copa Oro y Consuelo, Sistema Suizo) al instante.",
-  keywords: ["torneos e-football", "crear torneos fifa", "organizar torneos pes", "generador de fixture", "creador de ligas", "brackets eliminatorios", "sistema suizo", "esports"],
+  description: "Crea y gestiona torneos de E-Football, PES y FIFA gratis. Genera fixtures, tablas de posiciones, llaves eliminatorias y Sistema Suizo al instante.",
+  keywords: ["torneos e-football", "crear torneos fifa", "organizar torneos pes", "generador de fixture", "creador de ligas", "brackets eliminatorios"],
   authors: [{ name: "codemultiall" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Torneos E-Football - Crea tu competición",
-    description: "Genera fixtures, tablas y llaves para tus torneos de e-sports y fútbol virtual totalmente gratis.",
-    url: "https://codemultiall.net.pe", // Reemplazar con el dominio real si cambia
+    description: "Crea torneos de e-sports y fútbol virtual gratis. Genera tablas y llaves automáticamente.",
+    url: "/",
     siteName: "Torneos E-Football",
     images: [
       {
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Torneos E-Football - Crea tu competición",
-    description: "Genera fixtures, tablas y llaves para tus torneos de e-sports y fútbol virtual totalmente gratis.",
+    description: "Crea torneos de e-sports y fútbol virtual gratis. Genera tablas y llaves automáticamente.",
     images: ["/og-image.jpg"],
   },
   icons: {

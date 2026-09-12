@@ -13,11 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     
     return {
       title: `${tournament.name}`,
-      description: `Sigue los resultados en vivo, mira la tabla de posiciones y el fixture del torneo ${tournament.name} con ${tournament.teams.length} equipos en E-Football.`,
+      description: `Sigue los resultados en vivo, mira la tabla de posiciones y el fixture del torneo ${tournament.name} con ${tournament.teams.length} equipos.`,
+      alternates: {
+        canonical: `/t/${resolvedParams.id}`,
+      },
       openGraph: {
         title: `${tournament.name} | Resultados en vivo`,
         description: `Sigue los resultados, mira la tabla de posiciones y el fixture del torneo ${tournament.name}.`,
-        url: `https://codemultiall.net.pe/t/${resolvedParams.id}`,
+        url: `/t/${resolvedParams.id}`,
         images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
       },
     };
