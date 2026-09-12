@@ -503,7 +503,7 @@ export default function TournamentClient({ tournament }: { tournament: any }) {
                 {loading && <Loader2 className="w-4 h-4 text-neon animate-spin" />}
               </div>
 
-              <div className="flex flex-col gap-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+              <div className="flex flex-col gap-6 pr-2">
                 {rounds.map((roundObj) => (
                   <div key={`round_${roundObj}`} className="flex flex-col gap-3">
                     <h3 className="text-sm font-bold text-neon uppercase tracking-wider border-b border-neon/20 pb-1">Jornada {roundObj as number}</h3>
