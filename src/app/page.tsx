@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Trophy, ArrowRight, ShieldHalf } from 'lucide-react';
 import SearchBar from '@/components/SearchBar';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
@@ -26,7 +27,9 @@ export default function Home() {
           Genera fixtures, calcula posiciones automáticamente y compártelo con tus amigos.
         </p>
 
-        <SearchBar className="tour-search mb-10 w-full" />
+        <Suspense fallback={<div className="h-12 w-full max-w-lg mb-10 bg-white/5 rounded-lg animate-pulse"></div>}>
+          <SearchBar className="tour-search mb-10 w-full" />
+        </Suspense>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
           <Link 
