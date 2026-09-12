@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon: #ccff00; /* Verde/Amarillo fosforescente */
+  --color-neon-hover: #b3e600;
+  --color-dark-bg: #09090b;
+  --color-dark-surface: #18181b;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+}
+
+:root {
+  --background: var(--color-dark-bg);
+  --foreground: #f8fafc;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Un leve gradiente de fondo para darle el toque neón */
+  background-image: radial-gradient(circle at 50% -20%, rgba(204, 255, 0, 0.15), transparent 70%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Utilidades Glassmorphism y componentes base */
+@layer components {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+  }
+
+  .glass-input {
+    @apply bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-neon focus:ring-1 focus:ring-neon transition-all w-full;
+  }
+
+  .btn-neon {
+    @apply bg-neon text-black font-extrabold py-3 px-6 rounded-xl hover:bg-neon-hover shadow-[0_0_15px_rgba(204,255,0,0.4)] hover:shadow-[0_0_25px_rgba(204,255,0,0.6)] transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer;
+  }
+
+  .btn-glass {
+    @apply bg-white/5 border border-white/10 text-white font-medium py-3 px-6 rounded-xl hover:bg-white/10 transition-all active:scale-95 flex items-center justify-center gap-2 backdrop-blur-sm cursor-pointer;
+  }
+}
+
+/* Driver.js Neon Theme Overrides */
+.driver-theme-neon {
+  background-color: rgba(10, 10, 10, 0.95) !important;
+  border: 1px solid rgba(204, 255, 0, 0.5) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.driver-theme-neon .driver-popover-title {
+  color: #ccff00 !important;
+  font-weight: 900 !important;
+  font-size: 1.25rem !important;
+  margin-bottom: 8px !important;
+}
+
+.driver-theme-neon .driver-popover-description {
+  color: #a3a3a3 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+
+.driver-theme-neon .driver-popover-footer button {
+  background-color: transparent !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: bold !important;
+  transition: all 0.2s !important;
+  text-shadow: none !important;
+}
+
+.driver-theme-neon .driver-popover-footer button:hover {
+  border-color: #ccff00 !important;
+  color: #ccff00 !important;
+  background-color: rgba(204, 255, 0, 0.1) !important;
+}
+
+.driver-theme-neon .driver-popover-navigation-btns {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.driver-theme-neon .driver-popover-close-btn {
+  color: #a3a3a3 !important;
+}
+.driver-theme-neon .driver-popover-close-btn:hover {
+  color: white !important;
+}
