@@ -11,15 +11,40 @@ export default function CrearTorneo() {
   const [doubleRound, setDoubleRound] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleAddTeam = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' || e.key === ',') {
+  const addCurrentInput = (inputVal: string) => {
+    if (!inputVal.trim()) return;
+    
+    // Separar por comas o saltos de línea (ideal para copiar/pegar)
+    const newTeams = inputVal.split(/[\n,]/).map(t => t.trim()).filter(t => t);
+    
+    setTeams(prevTeams => {
+      const uniqueNew = newTeams.filter(t => !prevTeams.includes(t));
+      return [...prevTeams, ...uniqueNew];
+    });
+    setTeamInput('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.keyCode === 13) {
       e.preventDefault();
-      const newTeam = teamInput.trim();
-      if (newTeam && !teams.includes(newTeam)) {
-        setTeams([...teams, newTeam]);
-      }
-      setTeamInput('');
+      addCurrentInput(teamInput);
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    // Si el usuario escribe una coma en el móvil, lo convertimos automáticamente
+    if (val.includes(',') || val.includes('\n')) {
+      addCurrentInput(val);
+    } else {
+      setTeamInput(val);
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData('text');
+    addCurrentInput(pasted);
   };
 
   const removeTeam = (teamToRemove: string) => {
@@ -27,7 +52,7 @@ export default function CrearTorneo() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="max-w-4xl mx-auto p-3 md:p-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8 flex items-center gap-3">
         <div className="p-3 bg-neon/10 rounded-full">
           <Trophy className="w-8 h-8 text-neon" />
@@ -44,7 +69,7 @@ export default function CrearTorneo() {
         formData.append('teamsList', JSON.stringify(teams));
         await createTournament(formData);
         // Nota: createTournament redirige, no hace falta setLoading(false) a menos que haya error
-      }} className="glass-panel p-8 flex flex-col gap-8">
+      }} className="glass-panel p-4 md:p-8 flex flex-col gap-6 md:gap-8">
         
         {/* Nombre del Torneo */}
         <div className="flex flex-col gap-2">
@@ -156,14 +181,30 @@ export default function CrearTorneo() {
                 </button>
               </div>
             ))}
-            <input 
-              type="text"
-              value={teamInput}
-              onChange={(e) => setTeamInput(e.target.value)}
-              onKeyDown={handleAddTeam}
-              placeholder={teams.length === 0 ? "Ej: Real Madrid, presiona Enter" : "Agregar otro equipo..."}
-              className="bg-transparent outline-none text-white flex-1 min-w-[200px] text-sm py-1"
-            />
+            <div className="flex-1 min-w-[200px] flex items-center bg-transparent border-b border-transparent focus-within:border-neon transition-colors">
+              <input 
+                type="text"
+                value={teamInput}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                onPaste={handlePaste}
+                placeholder={teams.length === 0 ? "Ej: Real Madrid, presiona Enter" : "Agregar equipo..."}
+                className="bg-transparent outline-none text-white w-full text-sm py-2"
+                enterKeyHint="done"
+              />
+              {teamInput.trim() && (
+                <button 
+                  type="button" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addCurrentInput(teamInput);
+                  }}
+                  className="text-black bg-neon px-3 py-1 text-xs font-bold rounded-lg transition-colors ml-2 hover:bg-white"
+                >
+                  Añadir
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
